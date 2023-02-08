@@ -17,6 +17,10 @@ function onInputChange(evt) {
 
     const inputValue = evt.target.value.trim();
 
+    if(inputValue.length === 0) {
+        return clearList();
+    }
+
     fetchCountries(inputValue).then(countries => {
 
         if(countries.length > 10) {
@@ -35,12 +39,10 @@ function onInputChange(evt) {
             return updateCountryInfo(markup);
         } 
         else {
-            clearList();
             throw new Error('No data');
         }
     })
     .catch(onError);
-
 }
     
 function createListMarkup({name: {official}, flags: {svg}}) {
